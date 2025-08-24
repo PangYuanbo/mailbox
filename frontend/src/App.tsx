@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Toaster } from 'sonner'
-import { Navbar } from '@/components/layout/Navbar'
-import { Sidebar } from '@/components/layout/Sidebar'
+import { ModernNavbar } from '@/components/layout/ModernNavbar'
+import { ModernSidebar } from '@/components/layout/ModernSidebar'
 import { Dashboard } from '@/pages/Dashboard'
 import { NewspaperView } from '@/pages/NewspaperView'
 import { HomepageView } from '@/pages/HomepageView'
 import { useEmailStore } from '@/stores/useEmailStore'
+import { ModernDashboard } from '@/pages/ModernDashboard'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -43,22 +44,22 @@ function AppContent() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar 
+      <ModernNavbar 
         onMenuClick={() => setSidebarOpen(!sidebarOpen)}
         unreadCount={5}
       />
       
       <div className="flex">
-        <Sidebar
+        <ModernSidebar
           isOpen={sidebarOpen}
           currentView={currentView}
           onViewChange={handleViewChange}
           categories={mockCategories}
         />
         
-        <main className="flex-1 p-6 lg:ml-64">
+        <main className="flex-1 lg:ml-64">
           <div className="max-w-7xl mx-auto">
-            {currentView === 'dashboard' && <Dashboard />}
+            {currentView === 'dashboard' && <ModernDashboard />}
             {currentView === 'newspaper' && <NewspaperView />}
             {currentView === 'homepage' && <HomepageView />}
             {currentView === 'trending' && (
